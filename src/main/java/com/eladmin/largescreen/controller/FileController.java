@@ -52,7 +52,7 @@ public class FileController {
         FileDAO fileDAO = new FileDAO();
 
 
-        return null;
+        return "";
 
     }
 
