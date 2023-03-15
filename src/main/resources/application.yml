@@ -25,9 +25,5 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# 文件存储路径
-files:
-  upload:
-    path: D:/WorkFile/JavaProject/largeScreenFile/
 
 
