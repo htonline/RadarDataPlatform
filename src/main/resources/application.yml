@@ -1,0 +1,33 @@
+
+server:
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.75.131:3306/largeScreen?serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+    # SpringBoot默认文件上传，单次上传不能超过1MB, 多个文件上传大小不能多于10MB
+    # 在此更改此设置: 单次上传不能超过10MB, 多个文件上传大小不能多于100MB
+    # 若要无限制，则改为-1
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 文件存储路径
+files:
+  upload:
+    path: D:/WorkFile/JavaProject/largeScreenFile/
+
+
