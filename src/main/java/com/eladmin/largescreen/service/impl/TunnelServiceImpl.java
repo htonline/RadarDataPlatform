@@ -4,7 +4,10 @@ import com.eladmin.largescreen.entity.Tunnel;
 import com.eladmin.largescreen.mapper.TunnelMapper;
 import com.eladmin.largescreen.service.ITunnelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TunnelServiceImpl extends ServiceImpl<TunnelMapper, Tunnel> implements ITunnelService {
 
+    @Autowired
+    private TunnelMapper tunnelMapper;
+    @Override
+    public List<Tunnel> getTunnelDataAllOrderByState() {
+        return tunnelMapper.getTunnelDataAllOrderByState();
+    }
 }

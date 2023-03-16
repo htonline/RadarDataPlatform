@@ -3,6 +3,8 @@ package com.eladmin.largescreen.service;
 import com.eladmin.largescreen.entity.Tunnel;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ITunnelService extends IService<Tunnel> {
 
 
+    List<Tunnel> getTunnelDataAllOrderByState();
 }

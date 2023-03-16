@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eladmin.largescreen.mapper.TunnelMapper">
 
+    <select id="getTunnelDataAllOrderByState" resultType="com.eladmin.largescreen.entity.Tunnel">
+        SELECT *
+        FROM tunnel
+        ORDER BY tunnel_state ASC
+    </select>
 </mapper>

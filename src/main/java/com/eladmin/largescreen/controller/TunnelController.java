@@ -26,8 +26,8 @@ public class TunnelController {
     private ITunnelService tunnelService;
 
     @GetMapping("/")
-    public Result getTunnelDataAll() {
-        return Result.success(tunnelService.list());
+    public Result getTunnelDataAllOrderByState() {
+        return Result.success(tunnelService.getTunnelDataAllOrderByState());
     }
 
 
