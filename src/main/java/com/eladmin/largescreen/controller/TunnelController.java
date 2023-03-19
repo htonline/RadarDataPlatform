@@ -25,11 +25,23 @@ public class TunnelController {
     @Autowired
     private ITunnelService tunnelService;
 
+//    查询所有隧道信息, 并根据state排序输出（1，2，3，4）
     @GetMapping("/")
     public Result getTunnelDataAllOrderByState() {
         return Result.success(tunnelService.getTunnelDataAllOrderByState());
     }
 
+//    统计病害总数, 已修复数, 正在修复数和未修复数
+    @GetMapping("/countDiseaseStatus")
+    public Result countDiseaseStatus() {
+        return Result.success(tunnelService.countDiseaseStatus());
+    }
+
+// 统计各城市的修复率, 展示到center-bottom
+    @GetMapping("/statisticsRepairRateofEachCity")
+    public Result StatisticsRepairRateofEachCity() {
+        return Result.success(tunnelService.StatisticsRepairRateofEachCity());
+    }
 
 }
 

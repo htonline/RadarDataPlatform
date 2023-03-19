@@ -45,8 +45,4 @@ public class PieceServiceImpl extends ServiceImpl<PieceMapper, Piece> implements
         return diseaseTypesCounts;
     }
 
-    @Override
-    public void addDisease(Piece piece) {
-        pieceMapper.insert(piece);
-    }
 }

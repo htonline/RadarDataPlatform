@@ -20,5 +20,4 @@ public interface IPieceService extends IService<Piece> {
 
     DiseaseTypesCounts statisticsDiseaseTypesCounts();
 
-    void addDisease(Piece piece);
 }

@@ -39,12 +39,6 @@ public class PieceController {
         return Result.success(pieceService.statisticsDiseaseTypesCounts());
     }
 
-    @PostMapping("/addDisease")
-    public Result addDisease(@RequestBody Piece piece) {
-        pieceService.addDisease(piece);
-        return Result.success();
-    }
-
 
 
 

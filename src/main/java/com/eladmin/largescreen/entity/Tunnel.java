@@ -39,6 +39,9 @@ public class Tunnel implements Serializable {
 
       private String province;
 
+      private String city;
+
+      private String district;
 
       private String diseaseType;
 

@@ -7,4 +7,25 @@
         FROM tunnel
         ORDER BY tunnel_state ASC
     </select>
+    <select id="getTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tunnel;
+    </select>
+    <select id="getFixed" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tunnel WHERE tunnel_state = 4;
+    </select>
+    <select id="getFixing" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tunnel WHERE tunnel_state = 3;
+    </select>
+
+    <select id="StatisticsRepairRateOfEachCity" resultType="com.eladmin.largescreen.entity.UrbanRepairRate">
+        SELECT
+            city,
+            COUNT(CASE WHEN tunnel_state = 4 THEN 1 END) AS fixedCount,
+            COUNT(*) AS totalCount,
+            COUNT(CASE WHEN tunnel_state = 4 THEN 1 END) / COUNT(*) AS fixRate
+        FROM tunnel
+        GROUP BY city;
+    </select>
+
+
 </mapper>
