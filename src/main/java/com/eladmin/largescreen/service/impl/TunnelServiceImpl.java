@@ -57,6 +57,7 @@ public class TunnelServiceImpl extends ServiceImpl<TunnelMapper, Tunnel> impleme
         return diseaseStatus;
     }
 
+//    统计各城市的病害修复率（center-bottom）
     @Override
     public UrbanRepairRateDao StatisticsRepairRateofEachCity() {
         /*
@@ -72,7 +73,7 @@ public class TunnelServiceImpl extends ServiceImpl<TunnelMapper, Tunnel> impleme
         String[] cities = lists.stream().map(result -> result.getCity()).toArray(String[]::new);
         List<Integer> fixedCount = Arrays.asList(lists.stream().map(result -> result.getFixedCount()).toArray(Integer[]::new));
         List<Integer> totalCount = Arrays.asList(lists.stream().map(result -> result.getTotalCount()).toArray(Integer[]::new));
-        List<Double> fixedRate = Arrays.asList(lists.stream().map(result -> result.getFixRate()).toArray(Double[]::new));
+        List<Double> fixedRate = Arrays.asList(lists.stream().map(result -> result.getFixRate()*100).toArray(Double[]::new));
 
         urbanRepairRateDao.setCity(cities);
         urbanRepairRateDao.setFixedCount(fixedCount);
