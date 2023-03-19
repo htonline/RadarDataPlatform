@@ -26,4 +26,6 @@ public interface TunnelMapper extends BaseMapper<Tunnel> {
 
     Integer getFixing();
     List<UrbanRepairRate> StatisticsRepairRateOfEachCity();
+
+    List<Integer> statisticsDiseaseTypesCounts();
 }

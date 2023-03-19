@@ -43,5 +43,11 @@ public class TunnelController {
         return Result.success(tunnelService.StatisticsRepairRateofEachCity());
     }
 
+//    统计各病害类型所占的百分比
+    @GetMapping("/statisticsDiseaseTypesCounts")
+    public Result statisticsDiseaseTypesCounts() {
+        return Result.success(tunnelService.statisticsDiseaseTypesCounts());
+    }
+
 }
 

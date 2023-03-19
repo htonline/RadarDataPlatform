@@ -1,9 +1,6 @@
 package com.eladmin.largescreen.service.impl;
 
-import com.eladmin.largescreen.entity.DiseaseStatus;
-import com.eladmin.largescreen.entity.Tunnel;
-import com.eladmin.largescreen.entity.UrbanRepairRate;
-import com.eladmin.largescreen.entity.UrbanRepairRateDao;
+import com.eladmin.largescreen.entity.*;
 import com.eladmin.largescreen.mapper.TunnelMapper;
 import com.eladmin.largescreen.service.ITunnelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -83,5 +80,21 @@ public class TunnelServiceImpl extends ServiceImpl<TunnelMapper, Tunnel> impleme
         urbanRepairRateDao.setFixedRate(fixedRate);
 
         return urbanRepairRateDao;
+    }
+
+//    统计各病号类型的数量，计算占比
+    @Override
+    public DiseaseTypesCounts statisticsDiseaseTypesCounts() {
+        List<Integer> list = tunnelMapper.statisticsDiseaseTypesCounts();
+        DiseaseTypesCounts diseaseTypesCounts = new DiseaseTypesCounts();
+
+        diseaseTypesCounts.setCavityNum(list.get(0)) ;
+        diseaseTypesCounts.setVoidNum(list.get(1));
+        diseaseTypesCounts.setLoosenNum(list.get(2));
+        diseaseTypesCounts.setLeakNum(list.get(3));
+        Integer totalNum = list.get(0) + list.get(1) + list.get(2) +list.get(3);
+        diseaseTypesCounts.setTotalNum(totalNum);
+
+        return diseaseTypesCounts;
     }
 }

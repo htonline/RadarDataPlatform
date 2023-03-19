@@ -26,6 +26,19 @@
         FROM tunnel
         GROUP BY city;
     </select>
+    <select id="statisticsDiseaseTypesCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*) AS count
+        FROM tunnel
+        WHERE disease_type IN ('路基空洞', '路基脱空', '路基疏松', '路基渗水')
+        GROUP BY disease_type
+        ORDER BY
+            CASE disease_type
+            WHEN '路基空洞' THEN 1
+            WHEN '路基脱空' THEN 2
+            WHEN '路基疏松' THEN 3
+            WHEN '路基渗水' THEN 4
+        END;
+    </select>
 
 
 </mapper>
