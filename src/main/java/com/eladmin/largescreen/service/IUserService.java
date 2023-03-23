@@ -2,6 +2,7 @@ package com.eladmin.largescreen.service;
 
 import com.eladmin.largescreen.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.eladmin.largescreen.entity.UserDTO;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    boolean login(UserDTO userDTO);
 }
