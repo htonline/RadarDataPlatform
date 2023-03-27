@@ -13,7 +13,7 @@ spring:
     # 若要无限制，则改为-1
   servlet:
     multipart:
-      max-file-size: 10MB
+      max-file-size: 100MB
       max-request-size: 100MB
 
 
