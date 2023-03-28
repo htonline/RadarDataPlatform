@@ -21,4 +21,7 @@ public class UserDTO {
     private String username;
     @JsonProperty(value = "password")
     private String password;
+
+//    登录之后, 需要返回token
+    private String token;
 }

@@ -14,5 +14,5 @@ import com.eladmin.largescreen.entity.UserDTO;
  */
 public interface IUserService extends IService<User> {
 
-    boolean login(UserDTO userDTO);
+    UserDTO login(UserDTO userDTO);
 }
