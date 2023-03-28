@@ -11,9 +11,8 @@ import com.eladmin.largescreen.mapper.UserMapper;
 import com.eladmin.largescreen.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eladmin.largescreen.utils.TokenUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * <p>
@@ -28,12 +27,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     private static final Log LOG = Log.get();
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public UserDTO login(UserDTO userDTO) {
+//        从数据库中查询userDTO对应的用户信息给one
         User one = getUserInfo(userDTO);
 //        以下是业务异常
         if (one != null) {
             BeanUtil.copyProperties(one, userDTO, true);
+//            设置Token
+            String token = TokenUtils.genToken(one.getUserId().toString(), one.getPassword());
+            userDTO.setToken(token);
             return userDTO;
         } else {
             //one==null, 没有找到
@@ -75,6 +81,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new ServiceException(Constants.CODE_500, "系统错误");
         }
         return one;
+    }
 
+    @Override
+    public User getById(String id) {
+        return userMapper.getUserById(id);
     }
 }
