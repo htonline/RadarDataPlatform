@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author Zuohaitao
  * @date 2023-03-19 13:26
- * @describe
+ * @describe 左上方的图表需要
  */
 @Data
 @AllArgsConstructor

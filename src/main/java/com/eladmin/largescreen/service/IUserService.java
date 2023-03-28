@@ -15,4 +15,6 @@ import com.eladmin.largescreen.entity.UserDTO;
 public interface IUserService extends IService<User> {
 
     UserDTO login(UserDTO userDTO);
+
+    User register(UserDTO userDTO);
 }

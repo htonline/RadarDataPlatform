@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.handler.RsHandler;
 import com.eladmin.largescreen.entity.Constants;
 import com.eladmin.largescreen.entity.Result;
+import com.eladmin.largescreen.entity.User;
 import com.eladmin.largescreen.entity.UserDTO;
 import com.eladmin.largescreen.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,18 @@ public class UserController {
         }
         UserDTO dto = userService.login(userDTO);
         return Result.success(dto);
+    }
 
+    @PostMapping ("/register")
+    public Result register(@RequestBody UserDTO userDTO) {
+        String username = userDTO.getUsername();
+        String password = userDTO.getPassword();
+//        如果账户或密码有一个是空的, 则返回false
+        if (StrUtil.isBlank(username) || StrUtil.isBlank(password)) {
+            return Result.error(Constants.CODE_400, "参数错误");
+        }
+        User dto = userService.register(userDTO);
+        return Result.success(dto);
     }
 
 }
