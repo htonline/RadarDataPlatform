@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExcelDao {
-    private List<ExcelData> dataList;
+    private List<List<Integer>> dataList;
     private Integer[] rowList;
     private Integer[] colList;
 }

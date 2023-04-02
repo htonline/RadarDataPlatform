@@ -38,9 +38,20 @@ public class ExcelController {
 
         ExcelDao excelDao = new ExcelDao();
 
-        // 获取Excel表格的数据
+        // 获取Excel表格的数据, 下标分别是:rowIndex, columnIndex,value
+        // 最后需要返回的是一个数组，数组里面的结构，是一个只包含三个元素的数组
         List<ExcelData> result = excelListener.getDataList();
-        excelDao.setDataList(result);
+
+        List<List<Integer>> resultDao = new ArrayList<>();
+        for (ExcelData excelData : result) {
+            List<Integer> list = new ArrayList<>();
+            list.add(excelData.getRowIndex());
+            list.add(excelData.getColumnIndex());
+            list.add(excelData.getValue());
+            resultDao.add(list);
+        }
+
+        excelDao.setDataList(resultDao);
 
         Integer columnCount = excelListener.getColumnCount();
         Integer[] colList = new Integer[columnCount];
