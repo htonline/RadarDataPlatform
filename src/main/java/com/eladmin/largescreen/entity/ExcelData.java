@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExcelData {
-    private Long id;
-    private Integer value;
+    private Integer rowIndex;
+    private Integer columnIndex;
+    private String value;
 }

@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.eladmin.largescreen.entity.ExcelData;
 import com.eladmin.largescreen.entity.Result;
 import com.eladmin.largescreen.utils.ExcelListener;
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,12 +37,11 @@ public class ExcelController {
 
         // 调用 EasyExcel 的读取方法，传入 Excel 文件路径和读取配置对象
         // 设置headRowNumber=0, 表示第一行的数据也要; 默认值为1: 说明第一行是标题之类的，不需要获取。
-        EasyExcel.read(filePath, ExcelData.class, excelListener).sheet().headRowNumber(0).doRead();
+        EasyExcel.read(filePath, null, excelListener).sheet().headRowNumber(0).doRead();
 
         // 获取返回的数据
         List<ExcelData> result = excelListener.getDataList();
         System.out.println("获取到的数据：" + result);
-
 
         return Result.success(result);
     }

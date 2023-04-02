@@ -14,7 +14,7 @@ import java.util.Map;
  * @date 2023-04-02 11:36
  * @describe
  */
-public class ExcelListener extends AnalysisEventListener<ExcelData> {
+public class ExcelListener extends AnalysisEventListener<Map<Integer, String>>  {
 
     private List<ExcelData> dataList = new ArrayList<>();
 
@@ -25,10 +25,21 @@ public class ExcelListener extends AnalysisEventListener<ExcelData> {
      * @param context 解析上下文对象
      */
     @Override
-    public void invoke(ExcelData data, AnalysisContext context) {
-        // 将数据保存到 List 中
-        dataList.add(data);
+    public void invoke(Map<Integer, String> data, AnalysisContext context) {
+        int rowIndex = context.readRowHolder().getRowIndex(); // 获取行号
+        for (Map.Entry<Integer, String> entry : data.entrySet()) {
+            int columnIndex = entry.getKey(); // 获取列号
+            String cellValue = entry.getValue(); // 获取单元格的值
+            // 进行处理
+            ExcelData excelData = new ExcelData();
+            excelData.setRowIndex(rowIndex);
+            excelData.setColumnIndex(columnIndex);
+            excelData.setValue(cellValue);
+            dataList.add(excelData);
+        }
     }
+
+
 
     /**
      * 解析完所有数据后会执行该方法
@@ -37,20 +48,8 @@ public class ExcelListener extends AnalysisEventListener<ExcelData> {
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        // 处理数据
-        handleData(dataList);
     }
 
-    /**
-     * 处理数据的方法
-     *
-     * @param dataList Excel 数据列表
-     */
-    private void handleData(List<ExcelData> dataList) {
-        // 处理 Excel 数据
-        System.out.println("处理 Excel 数据：" + dataList);
-
-    }
 
     /**
      * 获取读取到的 Excel 数据
