@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 
 /**
  * @author Zuohaitao
@@ -20,5 +18,5 @@ import java.util.List;
 public class ExcelData {
     private Integer rowIndex;
     private Integer columnIndex;
-    private String value;
+    private Integer value;
 }

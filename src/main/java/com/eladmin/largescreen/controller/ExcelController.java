@@ -1,17 +1,14 @@
 package com.eladmin.largescreen.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
-import com.alibaba.excel.read.metadata.ReadSheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
+
+import com.eladmin.largescreen.entity.ExcelDao;
 import com.eladmin.largescreen.entity.ExcelData;
 import com.eladmin.largescreen.entity.Result;
 import com.eladmin.largescreen.utils.ExcelListener;
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/excel")
 public class ExcelController {
 
-    @GetMapping("/excelRead")
+    @GetMapping("/excelData")
 //    public Result getExcelData(@RequestParam("filePath") String filePath) throws IOException {
     public Result getExcelData() {
         // Excel 文件路径
@@ -39,12 +36,30 @@ public class ExcelController {
         // 设置headRowNumber=0, 表示第一行的数据也要; 默认值为1: 说明第一行是标题之类的，不需要获取。
         EasyExcel.read(filePath, null, excelListener).sheet().headRowNumber(0).doRead();
 
-        // 获取返回的数据
-        List<ExcelData> result = excelListener.getDataList();
-        System.out.println("获取到的数据：" + result);
+        ExcelDao excelDao = new ExcelDao();
 
-        return Result.success(result);
+        // 获取Excel表格的数据
+        List<ExcelData> result = excelListener.getDataList();
+        excelDao.setDataList(result);
+
+        Integer columnCount = excelListener.getColumnCount();
+        Integer[] colList = new Integer[columnCount];
+//        ArrayList<Integer> colList = new ArrayList<>();
+        for (int i = 0; i < columnCount; i++) {
+            colList[i] = i;
+        }
+        excelDao.setColList(colList);
+
+        Integer rowCount = excelListener.getRowCount();
+        Integer[] rowList = new Integer[rowCount];
+        for (int i = 0; i < rowCount; i++) {
+            rowList[i] = i;
+        }
+        excelDao.setRowList(rowList);
+
+        return Result.success(excelDao);
     }
+
 
 
 }

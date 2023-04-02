@@ -5,7 +5,6 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.eladmin.largescreen.entity.ExcelData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,12 @@ import java.util.Map;
  */
 public class ExcelListener extends AnalysisEventListener<Map<Integer, String>>  {
 
+//    表格数据
     private List<ExcelData> dataList = new ArrayList<>();
+//    记录表格的行数
+    private int rowCount;
+//    记录表格的列数
+    private int columnCount;
 
     /**
      * 每读取一行数据就会执行一次invoke方法
@@ -34,7 +38,7 @@ public class ExcelListener extends AnalysisEventListener<Map<Integer, String>>  
             ExcelData excelData = new ExcelData();
             excelData.setRowIndex(rowIndex);
             excelData.setColumnIndex(columnIndex);
-            excelData.setValue(cellValue);
+            excelData.setValue(Integer.parseInt(cellValue));
             dataList.add(excelData);
         }
     }
@@ -48,6 +52,9 @@ public class ExcelListener extends AnalysisEventListener<Map<Integer, String>>  
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
+        // 获取表格的行数和列数
+        rowCount = context.readRowHolder().getRowIndex();
+        columnCount = context.readRowHolder().getCellMap().size();
     }
 
 
@@ -58,6 +65,13 @@ public class ExcelListener extends AnalysisEventListener<Map<Integer, String>>  
      */
     public List<ExcelData> getDataList() {
         return dataList;
+    }
+
+    public Integer getRowCount() {
+        return rowCount;
+    }
+    public Integer getColumnCount() {
+        return columnCount;
     }
 
 
