@@ -1,16 +1,22 @@
 package com.eladmin.largescreen.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.alibaba.excel.EasyExcel;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.eladmin.largescreen.entity.ExcelDao;
 import com.eladmin.largescreen.entity.ExcelData;
+import com.eladmin.largescreen.entity.File;
 import com.eladmin.largescreen.entity.Result;
+import com.eladmin.largescreen.service.IFileService;
 import com.eladmin.largescreen.utils.ExcelListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,11 +28,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/excel")
 public class ExcelController {
 
+    @Autowired
+    private IFileService fileService;
+
     @GetMapping("/excelData")
-//    public Result getExcelData(@RequestParam("filePath") String filePath) throws IOException {
-    public Result getExcelData() {
-        // Excel 文件路径
-        String filePath = "D:\\WorkFile\\file\\data.xlsx";
+    public Result getExcelData(@RequestParam("tunnelId") String tunnelId) throws IOException {
+        /**
+         * 根据tunnelId去file表中拿对应的文件路径
+         * */
+        QueryWrapper<File> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("tunnel_id", tunnelId);
+        File one = fileService.getOne(queryWrapper);
+
+//        String filePath = "D:\\WorkFile\\file\\data.xlsx";
+
+        String filePath = one.getFilePath();
 
         // 创建 Excel 读取监听器对象
         ExcelListener excelListener = new ExcelListener();
